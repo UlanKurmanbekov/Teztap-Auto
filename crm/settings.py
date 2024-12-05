@@ -34,8 +34,15 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
 
-CSRF_TRUSTED_ORIGINS = ['https://36c9-185-138-186-162.ngrok-free.app']
+BASE_URL = os.getenv('BASE_ULR')
+
+CSRF_TRUSTED_ORIGINS = [
+    f'http://{BASE_URL}',
+    f'http://{BASE_URL}:3000',
+    'http://localhost:3000'
+]
 
 # Application definition
 
@@ -95,8 +102,11 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.getenv('DB_HOST'),
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
     }
 }
 

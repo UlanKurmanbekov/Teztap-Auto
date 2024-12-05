@@ -34,9 +34,9 @@ class Order(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders', verbose_name='Заказчик')
-    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE, verbose_name='Марка')
+    car_make = models.CharField(max_length=255, verbose_name='Марка')
     car_model = models.CharField(max_length=255, verbose_name='Модель')
-    car_body = models.ForeignKey(CarBody, on_delete=models.CASCADE, verbose_name='Кузов')
+    car_body = models.CharField(max_length=255, verbose_name='Кузов')
     car_year = models.CharField(max_length=4, verbose_name='Год автомобиля')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name='Статус')
     second_phone = models.CharField(max_length=255, verbose_name='Второй номер телефона')
