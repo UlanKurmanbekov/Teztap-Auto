@@ -21,15 +21,13 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 
-from rest_framework.permissions import AllowAny
-
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
-    path('orders/', include('orders.urls')),
+    path('', include('orders.urls')),
     path('notifications/', include('notifications.urls')),
 
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
