@@ -44,3 +44,11 @@ class SignUpSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    new_password = serializers.CharField()

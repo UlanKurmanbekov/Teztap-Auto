@@ -22,7 +22,7 @@ services:
     command: >
       bash -c "python manage.py migrate &&
                python manage.py collectstatic --no-input &&
-               gunicorn сrm.wsgi:application --bind 0.0.0.0:8000"
+               gunicorn crm.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - ./static:/app/static
       - ./media:/app/media
@@ -39,5 +39,34 @@ services:
       - ./static:/static
       - ./media:/media
 
+  redis:
+    image: redis
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/opt/redis/data
+
+  celery:
+    build: ./
+    container_name: teztapauto_celery
+    env_file:
+      - /var/www/.env
+    restart: always
+    volumes:
+      - ./:/app
+      - /data/static:/app/static
+      - /data/media:/app/media
+    depends_on:
+      - database
+      - redis
+    command: bash -c "celery -A teztapauto worker -B --loglevel=info"
+
+
 volumes:
   postgres_data:
+  redis-data:

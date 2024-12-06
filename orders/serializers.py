@@ -1,19 +1,7 @@
 from datetime import datetime
 
 from rest_framework import serializers
-from orders.models import Order, OrderImage, CarMake, CarBody
-
-
-class CarMakeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CarMake
-        fields = ['name']
-
-
-class CarBodySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CarBody
-        fields = ['name']
+from orders.models import Order, OrderImage
 
 
 class OrderImageSerializer(serializers.ModelSerializer):
@@ -30,8 +18,8 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = [
-            'id', 'car_make', 'car_model',
-            'car_year', 'car_body', 'vin_code',
+            'id', 'car_make_model',
+            'car_year', 'car_body', 'vin_code', 'vin_image',
             'second_phone', 'images', 'upload_images', 'sample', 'tech_passport'
         ]
 

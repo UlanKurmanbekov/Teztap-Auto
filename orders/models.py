@@ -3,17 +3,6 @@ from django.db import models
 from users.models import User
 
 
-class CarMake(models.Model):
-    name = models.CharField(verbose_name='Марка', max_length=255, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Марка'
-        verbose_name_plural = 'Марки'
-
-
 class CarBody(models.Model):
     name = models.CharField(verbose_name='Кузов', max_length=255, unique=True)
 
@@ -34,15 +23,15 @@ class Order(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders', verbose_name='Заказчик')
-    car_make = models.CharField(max_length=255, verbose_name='Марка')
-    car_model = models.CharField(max_length=255, verbose_name='Модель')
+    car_make_model = models.CharField(max_length=255, verbose_name='Марка и модель')
     car_body = models.CharField(max_length=255, verbose_name='Кузов')
     car_year = models.CharField(max_length=4, verbose_name='Год автомобиля')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name='Статус')
     second_phone = models.CharField(max_length=255, verbose_name='Второй номер телефона')
     sample = models.ImageField(verbose_name='Образец', upload_to='sample/', null=True, blank=True)
-    vin_code = models.CharField(verbose_name='VIN код', max_length=255)
-    tech_passport = models.ImageField(upload_to='tech_passport/', verbose_name='Тех. пасспорт', null=True, blank=True)
+    vin_code = models.CharField(verbose_name='VIN код', max_length=255, null=True, blank=True)
+    vin_image = models.ImageField(verbose_name='Фото VIN кода', upload_to='vin_code_images/', null=True, blank=True)
+    tech_passport = models.ImageField(upload_to='tech_passport/', verbose_name='Тех. паспорт', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлен')
 
@@ -60,7 +49,7 @@ class OrderImage(models.Model):
 
 
 class OrderPrice(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='price')
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name='price')
     cost_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Себестоимость')
     sale_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена продажи')
 
