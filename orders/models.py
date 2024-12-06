@@ -3,17 +3,6 @@ from django.db import models
 from users.models import User
 
 
-class CarBody(models.Model):
-    name = models.CharField(verbose_name='Кузов', max_length=255, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Кузов'
-        verbose_name_plural = 'Кузова'
-
-
 class Order(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Ожидает'),
@@ -46,6 +35,10 @@ class Order(models.Model):
 class OrderImage(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(verbose_name='Фото', upload_to='order-images/')
+
+    class Meta:
+        verbose_name = 'Фотография заказа'
+        verbose_name_plural = 'Фотографии заказа'
 
 
 class OrderPrice(models.Model):

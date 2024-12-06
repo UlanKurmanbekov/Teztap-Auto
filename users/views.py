@@ -33,17 +33,16 @@ token_generator = PasswordResetTokenGenerator()
 
 
 class PasswordResetRequestView(APIView):
-    permission_classes = [IsAuthenticated]
 
     @extend_schema(
-        request=None,
+        request=PasswordResetRequestSerializer,
         responses={
             '200': {'message': 'Ссылка для обновления пароля отправлена на вашу почту.'},
             '404': {'error': 'Пользователь не найден'}
         }
     )
     def post(self, request):
-        email = request.user.email
+        email = request.data.get('email')
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
