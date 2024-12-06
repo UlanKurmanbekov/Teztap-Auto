@@ -24,4 +24,4 @@ class Notification(models.Model):
         unique_together = ('order', 'message')
 
     def __str__(self):
-        return f'Уведомление для {self.recipient} по заказу {self.order}'
+        return f'{self.message} {self.order}'

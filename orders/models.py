@@ -25,7 +25,7 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлен')
 
     def __str__(self):
-        return f'Заказ №{self.id}: {self.user}'
+        return f'№{self.id}: {self.user}'
 
     class Meta:
         verbose_name = 'Заказ'
