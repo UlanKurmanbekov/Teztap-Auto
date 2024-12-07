@@ -14,6 +14,7 @@ class OrderSerializer(serializers.ModelSerializer):
     images = OrderImageSerializer(many=True, read_only=True)
     upload_images = serializers.ListField(child=serializers.ImageField(), write_only=True)
     vin_code = serializers.CharField(required=True)
+    status = serializers.CharField(read_only=True)
 
     class Meta:
         model = Order
