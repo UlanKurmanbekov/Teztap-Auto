@@ -19,7 +19,7 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = [
             'id', 'car_make_model',
-            'car_year', 'car_body', 'vin_code', 'vin_image', 'status'
+            'car_year', 'car_body', 'vin_code', 'vin_image', 'status',
             'second_phone', 'images', 'upload_images', 'sample', 'tech_passport'
         ]
 
