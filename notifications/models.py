@@ -21,7 +21,6 @@ class Notification(models.Model):
     class Meta:
         verbose_name = 'Уведомление'
         verbose_name_plural = 'Уведомления'
-        unique_together = ('order', 'message')
 
     def __str__(self):
         return f'{self.message} {self.order}'

@@ -22,6 +22,7 @@ def create_notification_on_status_change(sender, instance, created, **kwargs):
         )
     else:
         MESSAGES = {
+            'pending': 'Заказ в повторной обработке',
             'processing': 'Заказ в процессе обработки',
             'completed': 'Заказ завершен',
             'cancelled': 'Заказ отменен',

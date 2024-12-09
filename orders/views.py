@@ -1,12 +1,10 @@
-from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 
-from orders.models import Order, OrderImage
+from orders.models import Order
 from orders.serializers import OrderSerializer
 
 
