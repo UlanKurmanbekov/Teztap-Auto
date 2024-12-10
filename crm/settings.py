@@ -31,19 +31,16 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+BASE_URL = os.getenv('BASE_URL')
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = [BASE_URL]
 
-BASE_URL = os.getenv('BASE_ULR')
+CORS_ALLOWED_ORIGINS = [f'http://{BASE_URL}']
+
 
 CSRF_TRUSTED_ORIGINS = [
     f'http://{BASE_URL}',
-    f'http://{BASE_URL}:3000',
-    'http://localhost:3000'
 ]
-
 # Application definition
 
 INSTALLED_APPS = [
